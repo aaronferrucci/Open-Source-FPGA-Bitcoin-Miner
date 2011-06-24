@@ -33,10 +33,12 @@ package require TclCurl
 package require json
 
 set instances [dict create]
+set device_name "@1: EP4SGX230(.|ES) (0x024090DD)"
 
 proc find_instances {} {
 	global instances
-	foreach instance [get_insystem_source_probe_instance_info -hardware_name "USB-Blaster \[USB-0\]" -device_name "@1: EP3C120/EP4CE115 (0x020F70DD)"] {
+        global device_name
+	foreach instance [get_insystem_source_probe_instance_info -hardware_name "USB-Blaster \[USB-0\]" -device_name $device_name] {
 		dict set instances [lindex $instance 3] [lindex $instance 0]
 	}
 }
@@ -77,6 +79,8 @@ proc do_rpc_request {request} {
 	set rpc_request $request
 	
 	puts "Request: $request"
+        puts "url: $url"
+        puts "userpass: $userpass"
 	
 	curl::transfer -url $url -encoding identity -failonerror 0 -tcpnodelay 1 -userpwd $userpass -httpauth basic -httpheader [list "Content-type: application/json" "Content-Length: $requestlen" "Expect:"] -post 1 -readproc readRPCRequest -errorbuffer curlerrors -writeproc writeHTTPResult
 	
@@ -164,14 +168,15 @@ proc submit_work {data nonce} {
 
 find_instances
 
-start_insystem_source_probe -hardware_name "USB-Blaster \[USB-0\]" -device_name "@1: EP3C120/EP4CE115 (0x020F70DD)"
+start_insystem_source_probe -hardware_name "USB-Blaster \[USB-0\]" -device_name $device_name
 
 
 ############## EDIT THESE ##############
 set url "http://btcguild.com:8332"
-set userpass "youremailhere@example.com:yourpasswordhere"
+set worker_name "<your worker name>"
+set worker_pass "<your worker password>"
+set userpass $worker_name:$worker_pass
 ########################################
-
 
 while {1} {
 	# Get new work
