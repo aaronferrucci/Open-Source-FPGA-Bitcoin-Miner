@@ -63,7 +63,7 @@ module fpgaminer_top (osc_clk);
 	//// PLL
 	wire hash_clk;
 	`ifndef SIM
-		main_pll pll_blk (osc_clk, hash_clk);
+		main_pll pll_blk (.inclk0 (osc_clk), .c0 (hash_clk));
 	`else
 		assign hash_clk = osc_clk;
 	`endif
