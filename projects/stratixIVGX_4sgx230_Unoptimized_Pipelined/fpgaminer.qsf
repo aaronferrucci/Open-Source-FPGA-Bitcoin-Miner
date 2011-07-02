@@ -40,7 +40,7 @@ set_global_assignment -name DEVICE EP4SGX230KF40C2ES
 set_global_assignment -name TOP_LEVEL_ENTITY fpgaminer_top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "10.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:52:09  MAY 05, 2011"
-set_global_assignment -name LAST_QUARTUS_VERSION 11.0
+set_global_assignment -name LAST_QUARTUS_VERSION 10.0
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE ANY
@@ -73,6 +73,7 @@ set_global_assignment -name POWER_DEFAULT_TOGGLE_RATE 65%
 set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
 set_global_assignment -name VERILOG_MACRO "CONFIG_LOOP_LOG2=0"
 
+set_global_assignment -name VERILOG_FILE ../../src/fpgaminer_core.v
 set_global_assignment -name SDC_FILE fpgaminer.sdc
 set_global_assignment -name VERILOG_FILE ../../src/sha256_transform.v
 set_global_assignment -name VERILOG_FILE ../../src/fpgaminer_top.v
