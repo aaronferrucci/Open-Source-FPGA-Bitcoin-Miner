@@ -80,8 +80,8 @@ module fpgaminer_core #(
 		reset ? 32'd0 :
 		feedback_next ? nonce : (nonce + 32'd1);
 
-        reg [256:0] midstate_buf;
-        reg [256:0] data_buf;
+	reg [255:0] midstate_buf;
+	reg [255:0] data_buf;
 
 	always @ (posedge clk)
 	begin
