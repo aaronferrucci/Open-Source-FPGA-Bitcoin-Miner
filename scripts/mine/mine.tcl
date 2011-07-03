@@ -79,8 +79,6 @@ proc do_rpc_request {request} {
 	set rpc_request $request
 	
 	puts "Request: $request"
-        puts "url: $url"
-        puts "userpass: $userpass"
 	
 	curl::transfer -url $url -encoding identity -failonerror 0 -tcpnodelay 1 -userpwd $userpass -httpauth basic -httpheader [list "Content-type: application/json" "Content-Length: $requestlen" "Expect:"] -post 1 -readproc readRPCRequest -errorbuffer curlerrors -writeproc writeHTTPResult
 	
@@ -170,13 +168,7 @@ find_instances
 
 start_insystem_source_probe -hardware_name "USB-Blaster \[USB-0\]" -device_name $device_name
 
-
-############## EDIT THESE ##############
-set url "http://btcguild.com:8332"
-set worker_name "<your worker name>"
-set worker_pass "<your worker password>"
-set userpass $worker_name:$worker_pass
-########################################
+source miner_auth.tcl
 
 while {1} {
 	# Get new work
