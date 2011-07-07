@@ -103,7 +103,7 @@ module fpgaminer_reg256 (
   input [3:0] byteenable,
   input [31:0] writedata,
   input write,
-  output [255:0] readdata
+  output [255:0] value
 );
   reg [31:0] shadow [0:6];
   reg [31:0] mem [0:7];
@@ -164,8 +164,8 @@ module fpgaminer_reg256 (
 
   genvar i;
   generate
-    for (i = 0; i < 8; i = i + 1) begin : readdata_assignment
-      assign readdata[(i + 1) * 32 - 1:i * 32] = mem[i];
+    for (i = 0; i < 8; i = i + 1) begin : value_assignment
+      assign value[(i + 1) * 32 - 1:i * 32] = mem[i];
     end
   endgenerate
 

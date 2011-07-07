@@ -9,7 +9,7 @@ module fpgaminer_core #(
     // And so on.
     //
     // Valid range: [0, 5]
-    parameter LOOP_LOG2
+    parameter LOOP_LOG2 = 0
   )
   (
     input clk,

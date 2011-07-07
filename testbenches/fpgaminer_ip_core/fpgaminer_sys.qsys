@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags=""
+   categories="System" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element $${FILENAME}
+   {
+   }
+   element fpgaminer_0
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="deviceFamily" value="STINGRAY" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="1" />
+ <parameter name="timeStamp" value="1309997499796" />
+ <interface
+   name="fpgaminer_0_clock"
+   internal="fpgaminer_0.clock"
+   type="clock"
+   dir="end" />
+ <interface
+   name="fpgaminer_0_reset"
+   internal="fpgaminer_0.reset"
+   type="reset"
+   dir="end" />
+ <interface
+   name="fpgaminer_0_s0"
+   internal="fpgaminer_0.s0"
+   type="avalon"
+   dir="end" />
+ <module kind="fpgaminer" version="1.0" enabled="1" name="fpgaminer_0">
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="0" />
+ </module>
+</system>
