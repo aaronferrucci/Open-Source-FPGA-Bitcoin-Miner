@@ -1,3 +1,12 @@
+# Below generate code was copied from the GUI console when it generated the
+# testbench system.  Unfortunately, below doesn't work from the command line -
+# target "create_tb" doesn't produce a testbench system.  Not sure why... for
+# now, run qsys-edit on fpgaminer_sys.qsys, choose generation options as listed
+# in readme.txt, and click "generate".  After that, go to
+# fpgaminer_sys/testbench and type "make" to run the simulation.
+force_fail:
+	false
+
 generate: create_tb generate_tb generate_simscript
 create_tb:
 	ip-generate \
