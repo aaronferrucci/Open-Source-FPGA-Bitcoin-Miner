@@ -12,11 +12,35 @@
    element $${FILENAME}
    {
    }
-   element fpgaminer_0
+   element clock_bridge_0
    {
       datum _sortIndex
       {
          value = "0";
+         type = "int";
+      }
+   }
+   element fpgaminer_0
+   {
+      datum _sortIndex
+      {
+         value = "3";
+         type = "int";
+      }
+   }
+   element mm_bridge_0
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
+   element reset_bridge_0
+   {
+      datum _sortIndex
+      {
+         value = "1";
          type = "int";
       }
    }
@@ -33,23 +57,85 @@
  <parameter name="projectName" value="" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1309997499796" />
+ <parameter name="timeStamp" value="1310485937582" />
+ <interface name="clk" internal="clock_bridge_0.in_clk" type="clock" dir="end" />
  <interface
-   name="fpgaminer_0_clock"
-   internal="fpgaminer_0.clock"
-   type="clock"
-   dir="end" />
- <interface
-   name="fpgaminer_0_reset"
-   internal="fpgaminer_0.reset"
+   name="reset"
+   internal="reset_bridge_0.in_reset"
    type="reset"
    dir="end" />
  <interface
-   name="fpgaminer_0_s0"
-   internal="fpgaminer_0.s0"
+   name="mm_bridge_0_s0"
+   internal="mm_bridge_0.s0"
    type="avalon"
    dir="end" />
- <module kind="fpgaminer" version="1.0" enabled="1" name="fpgaminer_0">
-  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="0" />
+ <module kind="fpgaminer" version="1.0" enabled="1" name="fpgaminer_0" />
+ <module
+   kind="altera_clock_bridge"
+   version="11.0"
+   enabled="1"
+   name="clock_bridge_0">
+  <parameter name="DERIVED_CLOCK_RATE" value="0" />
+  <parameter name="EXPLICIT_CLOCK_RATE" value="0" />
+  <parameter name="NUM_CLOCK_OUTPUTS" value="1" />
  </module>
+ <module
+   kind="altera_reset_bridge"
+   version="11.0"
+   enabled="1"
+   name="reset_bridge_0">
+  <parameter name="ACTIVE_LOW_RESET" value="0" />
+  <parameter name="SYNCHRONOUS_EDGES" value="deassert" />
+  <parameter name="NUM_RESET_OUTPUTS" value="1" />
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="0" />
+ </module>
+ <module
+   kind="altera_avalon_mm_bridge"
+   version="11.0"
+   enabled="1"
+   name="mm_bridge_0">
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="SYMBOL_WIDTH" value="8" />
+  <parameter name="ADDRESS_WIDTH" value="7" />
+  <parameter name="ADDRESS_UNITS" value="SYMBOLS" />
+  <parameter name="MAX_BURST_SIZE" value="1" />
+  <parameter name="MAX_PENDING_RESPONSES" value="1" />
+  <parameter name="PIPELINE_COMMAND" value="0" />
+  <parameter name="PIPELINE_RESPONSE" value="0" />
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="0" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV GX" />
+ </module>
+ <connection
+   kind="clock"
+   version="11.0"
+   start="clock_bridge_0.out_clk"
+   end="reset_bridge_0.clk" />
+ <connection
+   kind="reset"
+   version="11.0"
+   start="reset_bridge_0.out_reset"
+   end="fpgaminer_0.reset" />
+ <connection
+   kind="clock"
+   version="11.0"
+   start="clock_bridge_0.out_clk"
+   end="fpgaminer_0.clock" />
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="mm_bridge_0.m0"
+   end="fpgaminer_0.s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+ </connection>
+ <connection
+   kind="clock"
+   version="11.0"
+   start="clock_bridge_0.out_clk"
+   end="mm_bridge_0.clk" />
+ <connection
+   kind="reset"
+   version="11.0"
+   start="reset_bridge_0.out_reset"
+   end="mm_bridge_0.reset" />
 </system>

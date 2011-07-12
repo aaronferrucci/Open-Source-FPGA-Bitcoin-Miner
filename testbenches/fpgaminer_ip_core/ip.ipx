@@ -1,0 +1,5 @@
+<library>
+	<path path="../../src/ip/fpgaminer/*" >
+		<tag2 key="COMPONENT_IN_PROJECT" value="true" />
+	</path>
+</library>
